@@ -17,7 +17,15 @@ namespace _25DH110044_MyStore.Areas.Admin
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new 
+                { 
+                    action = "Index", 
+                    id = UrlParameter.Optional 
+                },
+                new[]
+                {
+                    "_25DH110044_MyStore.Areas.Admin.Controllers"
+                }
             );
         }
     }

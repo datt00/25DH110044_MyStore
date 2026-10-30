@@ -20,14 +20,16 @@ namespace _25DH110044_MyStore.Areas.Admin.Controllers
         {
             return View(db.Categories.ToList());
         }
-
+       
+     
         // GET: Admin/Categories/Details/5
         // GET: lấy chi tiết 1 bản ghi có CategoryID = ID
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest); //Mã lỗi 400: thiếu giá trị truyền vào 
+                //Mã lỗi 400: thiếu giá trị truyền vào
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest); 
             }
             Category category = db.Categories.Find(id);
             if (category == null) //Không tìm thấy bản ghi 
@@ -44,12 +46,26 @@ namespace _25DH110044_MyStore.Areas.Admin.Controllers
         {
             return View();
         }
-
+        //POST: Admin/Categories/Create
+        // POST: Lưu dữ liệu nhập vào từ form Create vào DB
+        // For more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "CategoryID,CategoryName")] Category category)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Categories.Add(category);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(category);
+        }
         // GET: Admin/Categories/Edit/5
         // GET: lấy dữ liệu của một danh mục đã có sao cho CategoryID = ID
         public ActionResult Edit(int? id)
         {
-            Details(id);
+           
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -77,23 +93,7 @@ namespace _25DH110044_MyStore.Areas.Admin.Controllers
             }
             return View(category);
         }
-        // POST: Admin/Categories/Create
-        // POST: Lưu dữ liệu nhập vào từ form Create vào DB
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CategoryID,CategoryName")] Category category)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Categories.Add(category);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(category);
-        }
+        
 
         // GET: Admin/Categories/Delete/5
         public ActionResult Delete(int? id)

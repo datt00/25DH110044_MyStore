@@ -237,6 +237,8 @@
     <Content Include="Areas\Admin\Views\Products\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Products\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\PVCreateEditCategory.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\PVCreateEditProduct.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\PVProductInfo.cshtml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
